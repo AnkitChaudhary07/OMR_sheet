@@ -29,13 +29,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
             textView = (TextView) view.findViewById(R.id.textView);
             button = (Button) view.findViewById(R.id.button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context,Dummy_users.class);
-
-                }
-            });
+//            button.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(context,Dummy_users.class);
+//
+//                }
+//            });
         }
         public TextView getTextView() {
             return textView;
