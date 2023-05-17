@@ -1,5 +1,6 @@
 package com.example.omrscanningapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,11 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+    private Context context;
+//
+//    public CustomAdapter(Context context) {
+//        this.context = context;
+//    }
 
     private String[] localDataSet;
     private TextView textView, textView2;
@@ -29,13 +35,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
             textView = (TextView) view.findViewById(R.id.textView);
             button = (Button) view.findViewById(R.id.button);
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context,Dummy_users.class);
-//
-//                }
-//            });
         }
         public TextView getTextView() {
             return textView;
@@ -43,7 +42,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     /* Step 1: Initialize the dataset of the Adapter */
-    public CustomAdapter(String[] dataSet) {
+    public CustomAdapter(Context context,String[] dataSet) {
+        this.context = context;
         localDataSet = dataSet;
     }
 
@@ -60,19 +60,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     // Step 3: Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-
-        /*textView.setText(localDataSet[position].name);
-        textView2.setText(localDataSet[position].phoneNo);*/
-
         viewHolder.getTextView().setText(localDataSet[position]);
-
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent();
+//                Toast.makeText(context, "hellloo buddy", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(context,demo.class);
+                context.startActivity(intent);
             }
         });
     }

@@ -23,6 +23,14 @@
         android:layout_height="55dp"
         android:layout_margin="20dp"
         android:background="@color/black"
-        android:text="Scan OMR"
+        android:text="Camera"
         android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="175dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round_corners_button"
+        android:text="Scan"
+        android:textStyle="bold" />
 </LinearLayout>

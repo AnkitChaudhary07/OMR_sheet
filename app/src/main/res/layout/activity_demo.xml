@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.opencv.android.JavaCameraView
+        android:id="@+id/camera_view"
+        android:layout_width="match_parent"
+        android:layout_height="362dp"
+        opencv:camera_id="any"
+        opencv:show_fps="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="116dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/round_corners_button"
+            android:text="Scan OMR" />
+
+        <Button
+            android:id="@+id/cameraButton"
+            android:layout_width="116dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/round_corners_button"
+            android:text="Camera" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_scanned"
+        android:layout_width="421dp"
+        android:layout_height="264dp"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
