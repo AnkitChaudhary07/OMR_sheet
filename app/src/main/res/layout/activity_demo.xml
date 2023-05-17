@@ -8,7 +8,7 @@
     <org.opencv.android.JavaCameraView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
-        android:layout_height="362dp"
+        android:layout_height="276dp"
         opencv:camera_id="any"
         opencv:show_fps="true" />
 
@@ -21,7 +21,7 @@
             android:id="@+id/btn_scan"
             android:layout_width="116dp"
             android:layout_height="60dp"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:layout_marginLeft="50dp"
             android:background="@drawable/round_corners_button"
             android:text="Scan OMR" />
@@ -31,6 +31,7 @@
             android:layout_width="116dp"
             android:layout_height="60dp"
             android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
             android:background="@drawable/round_corners_button"
             android:text="Camera" />
     </LinearLayout>

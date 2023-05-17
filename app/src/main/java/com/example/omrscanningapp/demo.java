@@ -2,6 +2,7 @@ package com.example.omrscanningapp;
 
 import static com.example.omrscanningapp.R.id.camera_view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,16 +65,23 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
 
        mOpenCvCameraView = findViewById(camera_view);
         //mOpenCvCameraView.setCameraIndex(CameraBridgeViewBase.CAMERA_ID_BACK);
-        mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
         // Register the CvCameraViewListener2 callback
         mOpenCvCameraView.setCvCameraViewListener(this);
 
+        cameraButton = findViewById(R.id.cameraButton);
         mScanButton = findViewById(R.id.btn_scan);
         mScannedImageView = findViewById(R.id.img_scanned);
 
-
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent icamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(icamera,CAMERA_PERMISSION_REQUEST);
+            }
+        });
         mScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +99,17 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         });
 
         requestCameraPermission();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if(requestCode == CAMERA_PERMISSION_REQUEST) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                mScannedImageView.setImageBitmap(bitmap);
+            }
+        }
     }
 
     private void requestCameraPermission() {
