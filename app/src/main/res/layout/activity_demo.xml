@@ -3,7 +3,9 @@
     xmlns:opencv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".demo">
 
     <org.opencv.android.JavaCameraView
         android:id="@+id/camera_view"

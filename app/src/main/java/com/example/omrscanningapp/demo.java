@@ -2,6 +2,7 @@ package com.example.omrscanningapp;
 
 import static com.example.omrscanningapp.R.id.camera_view;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,7 +37,7 @@ import org.opencv.imgproc.Imgproc;
 
 public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    private static final int CAMERA_PERMISSION_REQUEST = 1;
+    final int CAMERA_PERMISSION_REQUEST = 100;
     private CameraBridgeViewBase mOpenCvCameraView;
     private boolean mCameraPermissionGranted = true;
     private Mat mRgba;
@@ -74,7 +75,6 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         cameraButton = findViewById(R.id.cameraButton);
         mScanButton = findViewById(R.id.btn_scan);
         mScannedImageView = findViewById(R.id.img_scanned);
-
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +82,8 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
                 startActivityForResult(icamera,CAMERA_PERMISSION_REQUEST);
             }
         });
+        // Calling the requestCameraPermission() method here
+        requestCameraPermission();
         mScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,10 +99,7 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
                     Toast.makeText(demo.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
-
-        requestCameraPermission();
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,25 +111,25 @@ public class demo extends AppCompatActivity implements CameraBridgeViewBase.CvCa
         }
     }
 
+
+    /*Request the camera permission at runtime in your activity or fragment.*/
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST);
         } else {
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST);
             mCameraPermissionGranted = true;
             initializeOpenCV();
         }
     }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERMISSION_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 mCameraPermissionGranted = true;
                 initializeOpenCV();
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(demo.this, "Camera permission denied", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
